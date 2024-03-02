@@ -1,4 +1,6 @@
-import random
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.multioutput import MultiOutputRegressor
 
 # Create the Tic Tac Toe board
 board = [' ' for _ in range(9)]
@@ -35,6 +37,12 @@ def make_move(player, position):
 def get_available_moves():
     return [i for i, x in enumerate(board) if x == ' ']
 
+# Model-based AI for the 'O' player
+def ai_move(board):
+    X = np.array([[board.count('X'), board.count('O'), board.count(' '), 
+                  board[0], board[1], board[2], board[3], board[4], board[5], board[6], board[7], board[8]]])
+    return model.predict(X)[0]
+
 # Function to play the game
 def play_game():
     while True:
@@ -52,8 +60,13 @@ def play_game():
         make_move('X', position)
         available_moves = get_available_moves()
         if available_moves:
-            ai_move = random.choice(available_moves)
-            make_move('O', ai_move)
+            ai_move_index = ai_move(board)
+            make_move('O', ai_move_index)
+
+# Load the trained model
+def load_model():
+    return model
 
 # Start the game
+model = load_model()
 play_game()
