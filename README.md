@@ -14,3 +14,6 @@ Reports performance of the Linear Regression model for the multilabel dataset.
 
 ## main.ipynb
 Runs all notebooks and obtains results in one program.
+
+## tictac_game.ipynb
+Human vs AI tic tac toe game using the best model we found.
